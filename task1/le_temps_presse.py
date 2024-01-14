@@ -1,6 +1,5 @@
 import svg
 import math
-#from random import choice
 
 
 rainbow = [
@@ -12,6 +11,7 @@ rainbow = [
     '#0000ff',
     '#8b00ff',
 ]
+
 dark = [
     '#8b0000',
     '#ec5800',
@@ -21,29 +21,49 @@ dark = [
     '#08457e',
     '#682860',
 ]
+
+faded = [
+    '#fcc7c7',
+    '#fce3c7',
+    '#fcf8c7',
+    '#c8fcc7',
+    '#c7fcf6',
+    '#c7defc',
+    '#e8c7fc',
+]
+
 colors = dark
+colors_alt = faded
 num_colors = len(colors)
-rows = 4
+rows = 8
 columns = 6
+num_circles = rows * columns
 width = 10 * columns
 height = 10 * rows
 radius = num_colors//2 + 1
 
 
 
-def rainbow_circles(x, y, j):
-    num_colors = len(colors)
+def rainbow_circles(x, y, j):    
     angle = j
     for i,color in enumerate(colors):
         #dash array and dash offset part adapted from https://stackoverflow.com/a/59232930
         circumference = 2 * math.pi * radius * (num_colors-i)/(num_colors)
-        offset = 0.25*circumference
-        dash = (angle / 360) * circumference         
+        offset = 0.25 *circumference
+        sweep = (angle / (num_circles * 15)) * circumference    
+        #print('proportion', angle)     
         yield svg.Circle(
             cx=x, cy=y, r=radius*(num_colors-i)/(num_colors),
             stroke=color, stroke_width=1,
             fill="transparent", 
-            stroke_dasharray=str(dash)+" "+str(circumference-dash),
+            stroke_dasharray=str(circumference - sweep)+" "+str(sweep),
+            stroke_dashoffset=str(offset),
+        )
+        yield svg.Circle(
+            cx=x, cy=y, r=radius*(num_colors-i)/(num_colors),
+            stroke=colors_alt[i], stroke_width=1,
+            fill="transparent", 
+            stroke_dasharray="0 "+str(circumference - sweep)+" "+str(sweep)+" 0",
             stroke_dashoffset=str(offset),
         )
 
