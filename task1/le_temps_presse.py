@@ -35,8 +35,8 @@ faded = [
 colors = dark
 colors_alt = faded
 num_colors = len(colors)
-rows = 8
-columns = 6
+rows = 6
+columns = 4
 num_circles = rows * columns
 width = 10 * columns
 height = 10 * rows
@@ -49,8 +49,8 @@ def rainbow_circles(x, y, j):
     for i,color in enumerate(colors):
         #dash array and dash offset part adapted from https://stackoverflow.com/a/59232930
         circumference = 2 * math.pi * radius * (num_colors-i)/(num_colors)
-        offset = 0.25 *circumference
-        sweep = (angle / (num_circles * 15)) * circumference    
+        offset = 0.25 
+        sweep = (angle / (num_circles)) 
         #print('proportion', angle)     
         yield svg.Circle(
             cx=x, cy=y, r=radius*(num_colors-i)/(num_colors),
@@ -66,6 +66,15 @@ def rainbow_circles(x, y, j):
             stroke_dasharray="0 "+str(circumference - sweep)+" "+str(sweep)+" 0",
             stroke_dashoffset=str(offset),
         )
+        #yield svg.Rect(
+        #   x=60, y=10,
+        #   rx=10, ry=10,
+        #    width=30, height=30,
+        #    stroke="black",
+        #    fill="transparent",
+        #    stroke_width=5,
+        #    )
+        
 
 def iron():
     #drawn using https://codepen.io/anthonydugois/pen/mewdyZ
