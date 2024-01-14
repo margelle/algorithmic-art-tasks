@@ -32,26 +32,36 @@ faded = [
     '#e8c7fc',
 ]
 
+grays = [    
+    '#777777',
+    '#999999',
+    '#D7D7D7',    
+    '#9D9D9D',
+    '#B3B3B3',
+    '#AAAAAA',
+    '#A5A5A5',
+]
+
 colors = dark
-colors_alt = faded
+colors_fade = grays
 num_colors = len(colors)
-rows = 6
-columns = 4
+rows = 12
+columns = 30
 num_circles = rows * columns
-width = 10 * columns
-height = 10 * rows
 radius = num_colors//2 + 1
+width = (2*radius + 2) * columns
+height = (2*radius + 2) * rows
 
 
 
-def rainbow_circles(x, y, j):    
-    angle = j
-    for i,color in enumerate(colors):
+def rainbow_circles(x, y, angle):        
+    for i, color in enumerate(colors):
         #dash array and dash offset part adapted from https://stackoverflow.com/a/59232930
         circumference = 2 * math.pi * radius * (num_colors-i)/(num_colors)
-        offset = 0.25 
-        sweep = (angle / (num_circles)) 
-        #print('proportion', angle)     
+        offset = 0.25 * circumference
+        sweep = (angle / (num_circles)) * circumference
+
+        #non-faded circle
         yield svg.Circle(
             cx=x, cy=y, r=radius*(num_colors-i)/(num_colors),
             stroke=color, stroke_width=1,
@@ -59,9 +69,11 @@ def rainbow_circles(x, y, j):
             stroke_dasharray=str(circumference - sweep)+" "+str(sweep),
             stroke_dashoffset=str(offset),
         )
+        
+        #faded circle
         yield svg.Circle(
             cx=x, cy=y, r=radius*(num_colors-i)/(num_colors),
-            stroke=colors_alt[i], stroke_width=1,
+            stroke=colors_fade[i], stroke_width=1,
             fill="transparent", 
             stroke_dasharray="0 "+str(circumference - sweep)+" "+str(sweep)+" 0",
             stroke_dashoffset=str(offset),
@@ -96,9 +108,11 @@ def iron():
 circles = []
 step_x = width // columns
 step_y = height // rows
+count = 0
 for y in range(step_y // 2, height, step_y):        
-    for x in range(step_x // 2, width, step_x):    
-        circles.extend(rainbow_circles(x=x, y=y, j=len(circles)))
+    for x in range(step_x // 2, width, step_x):            
+        circles.extend(rainbow_circles(x=x, y=y, angle=count))
+        count+=1
 
 irons=iron()
 canvas = svg.SVG(
