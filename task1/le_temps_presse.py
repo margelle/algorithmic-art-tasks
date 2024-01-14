@@ -1,15 +1,8 @@
 import svg
 import math
 #from random import choice
-#TODO draw an iron 
-#TODO remove sections of circles
 
 
-rows = 4
-columns = 6
-width = 60
-height = 40
-radius = 4
 colors = [
     '#ff0000',
     '#ff7f00',
@@ -19,18 +12,25 @@ colors = [
     '#0000ff',
     '#8b00ff',
 ]
+num_colors = len(colors)
+rows = 5
+columns = 12
+width = 10 * columns
+height = 10 * rows
+radius = num_colors//2 + 1
+
 
 
 def rainbow_circles(x, y, j):
     num_colors = len(colors)
-    angle = (j+1)*2
+    angle = j
     for i,color in enumerate(colors):
         #dash array and dash offset part adapted from https://stackoverflow.com/a/59232930
-        circumference = 2 * math.pi * radius * (num_colors-i)/num_colors
+        circumference = 2 * math.pi * radius * (num_colors-i)/(num_colors)
         offset = 0.25*circumference
         dash = (angle / 360) * circumference         
         yield svg.Circle(
-            cx=x, cy=y, r=radius*(num_colors-i)/num_colors,
+            cx=x, cy=y, r=radius*(num_colors-i)/(num_colors),
             stroke=color, stroke_width=1,
             fill="transparent", 
             stroke_dasharray=str(dash)+" "+str(circumference-dash),
