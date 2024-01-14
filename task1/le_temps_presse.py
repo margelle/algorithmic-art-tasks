@@ -3,7 +3,7 @@ import math
 #from random import choice
 
 
-colors = [
+rainbow = [
     '#ff0000',
     '#ff7f00',
     '#ffff00',
@@ -12,9 +12,19 @@ colors = [
     '#0000ff',
     '#8b00ff',
 ]
+dark = [
+    '#8b0000',
+    '#ec5800',
+    '#f5c71a',    
+    '#9dc209',
+    '#0a7e8c',
+    '#08457e',
+    '#682860',
+]
+colors = dark
 num_colors = len(colors)
-rows = 5
-columns = 12
+rows = 4
+columns = 6
 width = 10 * columns
 height = 10 * rows
 radius = num_colors//2 + 1
