@@ -42,6 +42,7 @@ grays = [
     '#A5A5A5',
 ]
 
+""" grays 
 colors = dark
 colors_fade = grays
 num_colors = len(colors)
@@ -51,7 +52,16 @@ num_circles = rows * columns
 radius = num_colors//2 + 1
 width = (2*radius + 2) * columns
 height = (2*radius + 2) * rows
-
+ """
+colors = dark
+colors_fade = faded
+num_colors = len(colors)
+rows = 5
+columns = 7
+num_circles = rows * columns
+radius = num_colors//2 + 1
+width = (2*radius + 2) * columns
+height = (2*radius + 2) * rows
 
 
 def rainbow_circles(x, y, angle):        
@@ -78,14 +88,7 @@ def rainbow_circles(x, y, angle):
             stroke_dasharray="0 "+str(circumference - sweep)+" "+str(sweep)+" 0",
             stroke_dashoffset=str(offset),
         )
-        #yield svg.Rect(
-        #   x=60, y=10,
-        #   rx=10, ry=10,
-        #    width=30, height=30,
-        #    stroke="black",
-        #    fill="transparent",
-        #    stroke_width=5,
-        #    )
+
         
 
 def iron():
