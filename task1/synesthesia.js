@@ -366,7 +366,7 @@ function draw() {
 
 }
 
-// Jitter class
+// Jitter class from https://p5js.org/examples/objects-array-of-objects.html
 class Jitter {
     constructor(colour) {
         this.x = random(width);
