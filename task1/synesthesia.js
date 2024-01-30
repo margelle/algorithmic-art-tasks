@@ -320,14 +320,20 @@ function setup() {
     img = loadImage('assets/small.JPG');
     //img = loadImage('assets/hedgehog.png');
     tenthousand = false;
+    flock_adj = 1;
     if (tenthousand) {
         stroke(0);
         frameRate(10);
         num_objects = 10000;
+        min_size = 1;
+        max_size = 5;
     } else {
+        // just number of words in list
         stroke(255);
         frameRate(30);
         num_objects = words.length;
+        min_size = 5;
+        max_size = 9;
     }
 
     for (let i = 0; i < num_objects; i++) {
@@ -367,9 +373,8 @@ class Jitter {
         this.y = random(height);
         //flock is based on length of word (sort of)
         this.flock = colour.replaceAll('0', '').length;
-        this.diameter = random(3, 7) * this.flock;
-        this.speed = 0.1 * this.flock;
-        //this.speed = 0.1 * this.flock * 100;
+        this.diameter = random(min_size, max_size) * this.flock;
+        this.speed = 0.1 * this.flock * flock_adj;
         this.color = color(colour);
         this.word = colour;
     }
