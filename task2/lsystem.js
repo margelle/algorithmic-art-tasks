@@ -1,32 +1,52 @@
 //adapted from https://p5js.org/examples/simulate-l-systems.html
 // TURTLE STUFF:
 let x, y; // the current position of the turtle
-let currentangle = 0; // which way the turtle is pointing
-let step = 25; // how much the turtle moves with each 'F'
+let currentangle = 45; // which way the turtle is pointing
+let step = 15; // how much the turtle moves with each 'F'
 let angle = 90; // how much the turtle turns with a '-' or '+'
 
 // LINDENMAYER STUFF (L-SYSTEMS)
-let thestring = 'D'; // "axiom" or start of the string
+let thestring = '-'; // "axiom" or start of the string
 let numloops = 5; // how many iterations to pre-compute
 let therules = []; // array for rules
-therules[0] = ['A', '-BF+AFA+FB-']; // first rule
-therules[1] = ['B', '+AF-BFC-FE+']; // second rule
-therules[2] = ['C', '-AF+CFB+FA-']; // third rule
-therules[3] = ['D', '+BF+CFD-FA+']; // fourth rule
-therules[4] = ['E', '-EF-CFD-FG-']; // fourth rule
-therules[5] = ['G', 'FFFFFFFFFA+']; // fourth rule
-//use vowel frequencies ???
-
+therules[0] = ['A', 'ALPHA'];
+therules[1] = ['B', 'BRAVO'];
+therules[2] = ['C', 'CHARLIE'];
+therules[3] = ['D', 'DELTA'];
+therules[4] = ['E', 'ECHO'];
+therules[5] = ['F', 'FOXTROT'];
+therules[6] = ['G', 'GOLF'];
+therules[7] = ['H', 'HOTEL'];
+therules[8] = ['I', 'INDIA'];
+therules[9] = ['J', 'JULIET'];
+therules[10] = ['K', 'KILO'];
+therules[11] = ['L', 'LIMA'];
+therules[12] = ['M', 'MIKE'];
+therules[13] = ['N', 'NOVEMBER'];
+therules[14] = ['O', 'OSCAR'];
+therules[15] = ['P', 'PAPA'];
+therules[16] = ['Q', 'QUEBEC'];
+therules[17] = ['R', 'ROMEO'];
+therules[18] = ['S', 'SIERRA'];
+therules[19] = ['T', 'TANGO'];
+therules[20] = ['U', 'UNIFORM'];
+therules[21] = ['V', 'VICTOR'];
+therules[22] = ['W', 'WHISKEY'];
+therules[23] = ['X', 'X-RAY'];
+therules[24] = ['Y', 'YANKEE'];
+therules[25] = ['Z', 'ZULU'];
+therules[26] = ['-', 'THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG'];
 
 let whereinstring = 0; // where in the L-system are we?
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    background(255);
-    stroke(0, 0, 0, 255);
+    colorMode(HSB);
+    background(0, 0, 100);
+    stroke(0, 0, 0);
 
     // start the x and y position at lower-left corner
-    x = 0;
+    x = 1;
     y = height - 1;
 
     // COMPUTE THE L-SYSTEM
@@ -71,13 +91,36 @@ function lindenmayer(s) {
 
     return outputstring; // send out the modified string
 }
-
+// do as sliding window ("size of snake") make it random
 // this is a custom function that draws turtle commands
 function drawIt(k) {
-    redmax = 22;
-    greenmax = 255;
-    bluemax = 255;
-    if (k == 'F') { // draw forward
+    huemax = 360;
+    huemin = 0;
+    if (k == 'A') {
+        currentangle += angle; // turn left
+        huemax = 200;
+        huemin = 180;
+    } else if (k == 'E') {
+        currentangle -= angle; // turn right
+        huemax = 225;
+        huemin = 275;
+    } else if (k == 'I') {
+        currentangle += angle / 2;
+        huemax = 250;
+        huemin = 295;
+    } else if (k == 'O') {
+        currentangle -= angle / 2;
+        huemin = 170;
+        huemax = 195;
+    } else if (k == 'U') {
+        currentangle += angle / 4;
+        huemin = 25;
+        huemax = 75;
+    } else if (k == 'Y') {
+        currentangle -= angle;
+        huemin = 0;
+        huemax = 20;
+    } else {
         // polar to cartesian based on step and currentangle:
         let x1 = x + step * cos(radians(currentangle));
         let y1 = y + step * sin(radians(currentangle));
@@ -92,30 +135,33 @@ function drawIt(k) {
         if (y < 0 || y > windowHeight) {
             y = height - 1;
         }
-    } else if (k == '+') {
-        currentangle += angle; // turn left
-        redmax = 0;
-        greenmax = 0;
-        bluemax = 255;
-    } else if (k == '-') {
-        currentangle -= angle; // turn right
+        ratio = (k.charCodeAt(0) - 64) / 27;
+        huepoint = lerp(0, 360, ratio);
+        huemin = huepoint - 5;
+        huemax = huepoint + 5;
     }
+
 
     // give me some random color values:
 
-    let r = random(0, redmax);
-    let g = random(0, greenmax);
-    let b = random(0, bluemax);
-    let a = random(50, 100);
+    let h = random(huemin, huemax);
+    let s = random(2, 100);
+    let b = random(1, 100);
+    let a = random(1, 100);
 
     // pick a gaussian (D&D) distribution for the radius:
     let radius = 0;
+    radius += random(0, 5);
     radius += random(0, 15);
-    radius += random(0, 15);
-    radius += random(0, 15);
+    radius += random(0, 25);
     radius = radius / 3;
 
     // draw the stuff:
-    fill(r, g, b, a);
+    //fill(r, g, b, a);
+    //stroke(r, g, b, a);
+    fill(h, s, b, a);
+    //stroke(h, s, b, a);
     ellipse(x, y, radius, radius);
+    stroke(0, 0, 0);
+
 }
