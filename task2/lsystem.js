@@ -94,6 +94,8 @@ function lindenmayer(s) {
 // do as sliding window ("size of snake") make it random
 // this is a custom function that draws turtle commands
 function drawIt(k) {
+    // do as sliding window ("size of snake") make it random   
+    background(0, 0, 100, random(0, 5) * 0.001);
     huemax = 360;
     huemin = 0;
     if (k == 'A') {
