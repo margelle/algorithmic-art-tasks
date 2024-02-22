@@ -42,7 +42,7 @@ let whereinstring = 0; // where in the L-system are we?
 function setup() {
     createCanvas(windowWidth, windowHeight);
     colorMode(HSB);
-    background(0, 0, 100);
+    background(0, 0, 0);
     stroke(0, 0, 0);
 
     // start the x and y position at lower-left corner
@@ -95,7 +95,7 @@ function lindenmayer(s) {
 // this is a custom function that draws turtle commands
 function drawIt(k) {
     // do as sliding window ("size of snake") make it random   
-    background(0, 0, 100, random(0, 5) * 0.001);
+    background(0, 0, 0, random(0, 5) * 0.001);
     huemax = 360;
     huemin = 0;
     if (k == 'A') {
@@ -127,7 +127,7 @@ function drawIt(k) {
         let x1 = x + step * cos(radians(currentangle));
         let y1 = y + step * sin(radians(currentangle));
         line(x, y, x1, y1); // connect the old and the new
-
+        //store these lines and use slice to take only last 50 line
         // update the turtle's position:
         x = x1;
         if (x > windowWidth || x < 0) {
