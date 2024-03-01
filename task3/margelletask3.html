@@ -4,8 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script>
-    <script src="https://unpkg.com/ccapture.js@1.1.0/build/CCapture.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.min.js"></script>
     <style>
         body {
             padding: 0;
@@ -24,11 +23,42 @@
             font-size: 14px
         }
     </style>
+    <style type="text/css">
+        .sourcecode {
+            position: absolute;
+            text-align: left;
+            bottom: 38px;
+            width: 100%;
+            color: #FFFFFF;
+            font-family: monospace;
+            margin-left: 12px;
+            font-size: 8px
+        }
+    </style>
 
 </head>
 
 <body style="background-color:#000000;">
-    <div class="credits">credits:<br>@margelle; p5.js; webgl; statcan</div>
+
+    <div class="sourcecode">
+        <pre id="fileDisplayArea"></pre>
+    </div>
+
+    <div class="credits">
+        credits:<br>@margelle; p5.js; webgl; statcan
+    </div>
+
+    <script>
+        window.onload = function() {
+            var fileDisplayArea = document.getElementById('fileDisplayArea');
+            fetch("dequoiserafaitlavenir.js")
+                .then((res) => res.text())
+                .then((text) => {
+                    fileDisplayArea.innerText = text;
+                })
+                .catch((e) => console.error(e));
+        }
+    </script>
 
     <script src="dequoiserafaitlavenir.js"></script>
 </body>
