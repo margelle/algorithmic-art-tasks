@@ -17,7 +17,7 @@ function preload() {
 
 function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
-    frameRate(20);
+    frameRate(7);
     water = lake;
     shutDownEverything();
 }
@@ -72,18 +72,20 @@ function draw() {
             normalMaterial();
             c = Math.floor(y % water.length);
             push();
-            fill(color(water[c]));
             translate(x, y, 0);
             rotateZ(travelZ * frameCount * 0.05);
             rotateX(travelX * frameCount * 0.04);
             rotateY(travelY * frameCount * 0.03);
+            fill(color(water[c]));
             xs *= futuresize * random(0.88, 0.99);
             ys *= futuresize * random(0.77, 0.99);
             zs *= futuresize * random(0.66, 0.99);
             ellipsoid(xs, ys, zs);
             //ellipsoid(1 + x * futuresize, 1 + y * futuresize, 1 + y * futuresize);
             pop();
+            if (xs > width || ys > height || zs > width) { break };
         }
+        if (xs > width || ys > height || zs > width) { break };
     }
 
 }
