@@ -2,37 +2,37 @@
 let travelZ = 1;
 let travelX = 1;
 let travelY = 1;
-let thefutureslice;
+let thefuture;
 let currentYear = 0;
-let scenario = 1; //different population scenarios
+let scenario = 1;
+let ocean = ['#469280', '#2f7a78', '#1d5a67', '#13404d', '#10313e']
+let lake = ['#26444c', '#011322', '#13455e', '#256685', '#6497b1']
+
 
 function preload() {
-
-    //Statistics Canada. Table 17-10-0057-01  Projected population, by projection scenario, age and sex, as of July 1 (x 1,000)
+    //<Statistics Canada. Table 17-10-0057-01  Projected population, by projection scenario, age and sex, as of July 1 (x 1,000)
     //https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1710005701
-    //rows are years, columns are growth scenarios
     thefuture = loadTable('1710005701-noSymbol_trimmed.csv', 'csv', 'header');
-    thefutureslice = thefuture;
-    //thefutureslice = thefuture.slice(11, 162).map(i => i.slice(4, 8));
 }
 
 function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
-    //createCanvas(windowWidth, windowHeight);
     frameRate(20);
-    resetIt();
+    water = lake;
+    shutDownEverything();
 }
 
-function resetIt() {
-    //reset the random values after awhile to keep things lively
-    background(0, 0);
+function shutDownEverything() {
+    //reset the random values after awhile to keep things lively    
     background('#424242');
     destin = random(60, 99); //ambientLight
-    kismet = random(1.75, 2.25); //division factor for initial height translation
-    fate = random(1.75, 2.25); //division factor for initial width translation
-    circumstance = random(15, 75); //size of loop steps
+    kismet = random(1.5, 4); //division factor for initial height translation
+    fate = random(1.25, 4); //division factor for initial width translation
+    circumstance = random(15, 35); //size of loop steps
     circonstance = random(20, 40); //specularMaterial
+    dizzy = random(8, 32);
 
+    console.log('reset');
 }
 
 function draw() {
@@ -44,41 +44,44 @@ function draw() {
     let locX = mouseX - width / 2;
     let locY = mouseY - height / 2;
     pointLight(255, 255, 255, locX, locY, 50);
-
+    // if (frameCount % 60 === 0) { cam.lookAt(random(-50, 50), random(-50, 50), 0); }
     specularMaterial(circonstance);
     shininess(80);
 
     //change the direction of travel into the future
-    if (mouseIsPressed) { travelZ *= -1 };
-    if (frameCount % 443 == 0) {
+    if (frameCount % 243 == 0) {
         travelX *= -1;
         scenario += 1;
     };
     if (frameCount % 877 == 0) { travelY *= -1 };
     if (mouseIsPressed) {
-        resetIt;
-        scenario += 1;
+        shutDownEverything;
+        travelZ *= -1;
     }
     currentYear += 1;
-    if (currentYear == thefutureslice.getRowCount()) { currentYear = 0 };
-    if (scenario == thefutureslice.getColumnCount()) { scenario = 1 };
-    //moves our drawing origin to the top left corner (WEBGL)
+    if (currentYear == thefuture.getRowCount()) { currentYear = 0 };
+    if (scenario == thefuture.getColumnCount()) { scenario = 1 };
     translate(-width / fate, -height / kismet, 0);
-
-    futuresizesX = parseFloat(thefutureslice.getString(currentYear, scenario)) / parseFloat(thefutureslice.getString(0, scenario));
-    futuresizesX = futuresizesX || 1;
-    futuresizesY = 1 / futuresizesX;
+    futuresize = parseFloat(thefuture.getString(currentYear, scenario)) / parseFloat(thefuture.getString(0, scenario));
+    futuresize = futuresize || 1;
+    xs = 1;
+    ys = 1;
+    zs = 1;
     for (x = 0; x < width; x += size) {
         for (y = 0; y < height; y += size) {
-            //ambientMaterial(24, 20, 29);
             normalMaterial();
-            fill(0, 65, 127);
+            c = Math.floor(y % water.length);
             push();
+            fill(color(water[c]));
             translate(x, y, 0);
-            rotateZ(travelZ * frameCount * 0.01);
-            rotateX(travelX * frameCount * 0.01);
-            rotateY(travelY * frameCount * 0.01);
-            ellipsoid(x + 6 * futuresizesX, y + 7 * futuresizesY, 8);
+            rotateZ(travelZ * frameCount * 0.05);
+            rotateX(travelX * frameCount * 0.04);
+            rotateY(travelY * frameCount * 0.03);
+            xs *= futuresize * random(0.88, 0.99);
+            ys *= futuresize * random(0.77, 0.99);
+            zs *= futuresize * random(0.66, 0.99);
+            ellipsoid(xs, ys, zs);
+            //ellipsoid(1 + x * futuresize, 1 + y * futuresize, 1 + y * futuresize);
             pop();
         }
     }
