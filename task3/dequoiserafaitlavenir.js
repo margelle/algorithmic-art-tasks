@@ -1,18 +1,7 @@
 // de quoi sera fait l'avenir
-let travel = 1;
-let backlines = true;
-shapes = [String.fromCodePoint(0x1bfc),
-    String.fromCodePoint(0x1bfd),
-    String.fromCodePoint(0x1bfe),
-    String.fromCodePoint(0x0df4),
-    String.fromCodePoint(0x0c84),
-    String.fromCodePoint(0x07f7),
-    String.fromCodePoint(0x0489),
-    String.fromCodePoint(0x2301),
-    String.fromCodePoint(0x0488),
-    String.fromCodePoint(0x058d),
-    String.fromCodePoint(0x058e)
-]
+let travelZ = 1;
+let travelX = 1;
+let travelY = 1;
 
 function preload() {
     //thefuture = loadTable('https://github.com/margelle/algorithmic-art-tasks/blob/main/task3/GEPData.csv', 'csv', 'header');
@@ -188,48 +177,31 @@ function preload() {
 function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
     //createCanvas(windowWidth, windowHeight);
-    //   frameRate(10);
     frameRate(20);
-    backlines = true;
+    background('#424242');
+    fate = random(1, 7);
+    kismet = random(1, 5);
+    circumstance = random(15, 50);
 }
 
 function draw() {
-    background(2, 29, 24);
-    size = 25;
-    stroke(1);
-    //make like weaving fates
-    if (backlines) {
-        for (x = 0; x < width; x += size) {
-            for (y = 0; y < height; y += size) {
-                c = (x % 11);
-                line(x - size * 2, y - size * 3, x + size * 2, y + size * 3);
-                //line(x, y, x, y + size);
-                fill(255);
-                stroke(0);
-                strokeWeight(4);
-                // text(shapes[3], x, y);
-                //cylinder(10, 100, 24, 16, true, false);
-                //point(x, y, x + 100);
-            }
-        }
-    }
-    //https://p5js.org/reference/#/p5/specularMaterial
-    ambientLight(60);
+    size = circumstance;
 
-    // add point light to showcase specular material
+    ambientLight(80);
+
+    // add point light 
     let locX = mouseX - width / 2;
     let locY = mouseY - height / 2;
     pointLight(255, 255, 255, locX, locY, 50);
 
     specularMaterial(25);
     shininess(80);
-    //torus(30, 10, 64, 64);
 
-    if (mouseIsPressed) { travel *= -1 }
-    translate(-width / 2, -height / 2, 0);
-
-    //    for (x = 0; x < thefuture.length; x += size) {
-    //      for (y = 0; y < 6; y += size) {
+    //change the direction of travel into the future
+    if (mouseIsPressed) { travelZ *= -1 }
+    if (frameCount % 23 == 0) { travelX *= -1 }
+    if (frameCount % 53 == 0) { travelY *= -1 }
+    translate(-width / fate, -height / kismet, 0);
 
     for (x = 1; x < width; x += size) {
         country = Math.floor(Math.random() * thefutureslice.length)
@@ -237,17 +209,17 @@ function draw() {
         futuresizesX = futuresizesX || 0;
         futuresizesY = thefutureslice[country][4];
         futuresizesY = futuresizesY || 0;
-        //console.log(parseFloat(thefutureslice[random(0, 151)][2]));
         for (y = 0; y < height; y += size) {
-            ambientMaterial(24, 2, 29);
+            ambientMaterial(24, 20, 29);
             normalMaterial();
             fill(6, 140, 250);
             push();
             translate(x, y, 0);
-            rotateZ(travel * frameCount * 0.01);
-            rotateX(frameCount * 0.01);
-            rotateY(frameCount * 0.01);
-            ellipsoid(x + futuresizesX, y + futuresizesY, 19);
+            rotateZ(travelZ * frameCount * 0.01);
+            rotateX(travelX * frameCount * 0.01);
+            rotateY(travelY * frameCount * 0.01);
+            ellipsoid(x + futuresizesX, y + futuresizesY, 14);
+            //ellipsoid(x + 6, y + 8, 11);+
             pop();
         }
     }
