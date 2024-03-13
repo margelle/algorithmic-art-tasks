@@ -17,7 +17,8 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(innerWidth, innerHeight, WEBGL);
+    myCanvas = createCanvas(innerWidth, innerHeight, WEBGL);
+    myCanvas.parent('canvasDiv');
     frameRate(7);
     water = lake;
     shutDownEverything();
@@ -25,18 +26,20 @@ function setup() {
 
 function shutDownEverything() {
     //reset the random values after awhile to keep things lively    
+    currentYear = 0;
     background('#424242');
-    destin = random(60, 99);
-    kismet = random(1.5, 2.1); //factor height translation
     fate = random(1.618, 3.14); //factor width translation
     circumstance = random(15, 35);
     circonstance = random(20, 40);
     dizzy = random(8, 32);
-    currentYear = 0;
-    console.log('r', destin, kismet, fate, circumstance, circonstance, dizzy);
+    destin = random(60, 99);
+    kismet = random(1.5, 2.1); //factor height translation
 }
 
 function draw() {
+    xs = 1;
+    ys = 1;
+    zs = 1;
     size = circumstance;
 
     ambientLight(destin);
@@ -64,9 +67,7 @@ function draw() {
     translate(-width / fate, -height / kismet, 0);
     futuresize = parseFloat(thefuture.getString(currentYear, scenario)) / parseFloat(thefuture.getString(0, scenario));
     futuresize = futuresize || 1;
-    xs = 1;
-    ys = 1;
-    zs = 1;
+
     for (x = 0; x < width; x += size) {
         for (y = 0; y < height; y += size) {
             normalMaterial();
@@ -81,7 +82,6 @@ function draw() {
             ys *= futuresize * random(0.77, 0.99);
             zs *= futuresize * random(0.66, 0.99);
             ellipsoid(constrain(xs, bygones * size, thebigone * size), constrain(ys, bygones * size, thebigone * size), constrain(zs, bygones * size, thebigone * size));
-            console.log(xs, ys, zs, currentYear + 2024);
             pop();
         }
     }

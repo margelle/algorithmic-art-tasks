@@ -35,7 +35,17 @@
             font-size: 8px
         }
     </style>
-
+    <style type="text/css">
+        #canvasDiv {
+            margin-left: 33%;
+            margin-right: 33%;
+            display: flex;
+            /* This centers our sketch horizontally. */
+            justify-content: center;
+            /* This centers our sketch vertically. */
+            align-items: center;
+        }
+    </style>
 </head>
 
 <body style="background-color:#000000;">
@@ -59,8 +69,8 @@
                 .catch((e) => console.error(e));
         }
     </script>
-
     <script src="dequoiserafaitlavenir.js"></script>
+    <div id="canvasDiv"></div>
 </body>
 
 </html>
