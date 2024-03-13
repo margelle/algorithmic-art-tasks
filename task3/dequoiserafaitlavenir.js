@@ -43,8 +43,6 @@ function draw() {
     size = circumstance;
 
     ambientLight(destin);
-
-    // add point light 
     let locX = mouseX - width / 2;
     let locY = mouseY - height / 2;
     pointLight(255, 255, 255, locX, locY, 50);
