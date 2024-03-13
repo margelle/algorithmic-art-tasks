@@ -10,8 +10,6 @@ let lake = ['#26444c', '#011322', '#13455e', '#256685', '#6497b1']
 let thebigone = 1.7;
 let bygones = 0.001;
 
-
-
 function preload() {
     //<Statistics Canada. Table 17-10-0057-01  Projected population, by projection scenario, age and sex, as of July 1 (x 1,000)
     //https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1710005701
@@ -20,7 +18,6 @@ function preload() {
 
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
-    //createCanvas(windowWidth, windowHeight, WEBGL);
     frameRate(7);
     water = lake;
     shutDownEverything();
@@ -29,11 +26,11 @@ function setup() {
 function shutDownEverything() {
     //reset the random values after awhile to keep things lively    
     background('#424242');
-    destin = random(60, 99); //ambientLight
-    kismet = random(1.5, 2.1); //division factor for initial height translation
-    fate = random(1.618, 3.14); //division factor for initial width translation
-    circumstance = random(15, 35); //size of loop steps
-    circonstance = random(20, 40); //specularMaterial
+    destin = random(60, 99);
+    kismet = random(1.5, 2.1); //factor height translation
+    fate = random(1.618, 3.14); //factor width translation
+    circumstance = random(15, 35);
+    circonstance = random(20, 40);
     dizzy = random(8, 32);
     currentYear = 0;
     console.log('r', destin, kismet, fate, circumstance, circonstance, dizzy);
@@ -84,15 +81,8 @@ function draw() {
             ys *= futuresize * random(0.77, 0.99);
             zs *= futuresize * random(0.66, 0.99);
             ellipsoid(constrain(xs, bygones * size, thebigone * size), constrain(ys, bygones * size, thebigone * size), constrain(zs, bygones * size, thebigone * size));
-            //line(xs, ys, zs, xs + 100, ys + 100, zs + 100);
             console.log(xs, ys, zs, currentYear + 2024);
-            //ellipsoid(1 + x * futuresize, 1 + y * futuresize, 1 + y * futuresize);
             pop();
-            //if (xs > width || ys > height || zs > width) { break };
-            //if (xs > size / 3 || ys > size / 3 || zs > size / 3) { break };
-
         }
-        //if (xs > width || ys > width || zs > width) { break };
     }
-
 }
