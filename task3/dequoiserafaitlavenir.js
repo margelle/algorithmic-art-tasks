@@ -17,8 +17,8 @@ function preload() {
 }
 
 function setup() {
-    myCanvas = createCanvas(innerWidth, innerHeight, WEBGL);
-    myCanvas.parent('canvasDiv');
+    createCanvas(innerWidth, innerHeight, WEBGL);
+    ///myCanvas.parent('canvasDiv');
     frameRate(7);
     water = lake;
     shutDownEverything();
