@@ -26,6 +26,8 @@ function setup() {
 
 function shutDownEverything() {
     //reset the random values after awhile to keep things lively    
+    createCanvas(innerWidth, innerHeight, WEBGL);
+
     currentYear = 0;
     background('#424242');
     fate = random(1.618, 3.14); //factor width translation
@@ -56,7 +58,8 @@ function draw() {
     };
     if (frameCount % 877 == 0) { travelY *= -1 };
     if (mouseIsPressed) {
-        shutDownEverything;
+        //setup();
+        shutDownEverything();
         travelZ *= -1;
     }
     currentYear += 1;
