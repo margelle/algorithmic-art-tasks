@@ -18,7 +18,6 @@ function preload() {
 
 function setup() {
     createCanvas(innerWidth, innerHeight, WEBGL);
-    ///myCanvas.parent('canvasDiv');
     frameRate(7);
     water = lake;
     shutDownEverything();
@@ -55,10 +54,10 @@ function draw() {
     if (frameCount % 243 == 0) {
         travelX *= -1;
         scenario += 1;
+        shutDownEverything();
     };
     if (frameCount % 877 == 0) { travelY *= -1 };
     if (mouseIsPressed) {
-        //setup();
         shutDownEverything();
         travelZ *= -1;
     }
