@@ -1,0 +1,62 @@
+[
+    {
+        "title": "ikeda[lines]",
+        "artist": "al.my.re",
+        "code": "https://github.com/bbaudry/swart-studio/tree/main/p5-experiments/plottable",
+		"colour": "#F0FF6E" 
+    },
+    {
+        "title": "Meta cartel",
+        "artist": "IFT625",
+        "code": "https://github.com/rethread-studio/algorithmic-art-course/cartels/",
+		"colour": "#80FFD0" 
+    },
+    {
+        "title": "Gertraud & the machines",
+        "artist": "Lena MK & William Diakité",
+        "code":"https://github.com/lenaMK/art-algorithmique/tree/main/gertraud-and-the-machines",
+		"colour": "#FF7AC6" 
+        },
+    {
+        "title": "varia",
+        "artist": "margelle et les étudiant·e·s du IFT6251",
+        "code": "https://github.com/margelle/algorithmic-art-tasks/tree/main/task4"
+		"colour": "#004281" 
+    },
+    {
+        "title": "CloudsByCircles",
+        "artist": "Maud Boisnard",
+        "code": "https://github.com/MdBoisnard/projets-Cloud2024/tree/main"
+		"colour":"#FF9933"
+    },
+    {
+        "title": "Hilbert curve",
+        "artist": "Brice",
+        "code":"https://github.com/bricemichelb/hilbertCurve"
+		"colour":"#33FF55"
+    },
+    {
+        "title": "Véus",
+        "artist": "Rafaela Pinter",
+        "code": "https://github.com/rafpinter/algorithmic-art/tree/main/07-vernissage",
+		"colour":"#990000"
+    },
+    {
+        "title": "Bio-Entangle",
+        "artist": "Felix Navarro",
+        "code":"https://github.com/siliconfeather/algo-art/tree/d03aa4fc97c9e5ad16589988f8cfc29b4b4014ef/02%20-%20gen-algo_artbreeder",
+		"colour":"#2600E6"
+    },
+    {
+        "title": "HRRD",
+        "artist": "Yvan",
+        "code": "https://github.com/YBTopaz8/DataDrivenArt/tree/main/HRRD",
+		"colour":"#00B31E"
+    },
+    {
+        "title": "bagel",
+        "artist": "Ivan Puhachov",
+        "code": "https://github.com/ivanpuhachov/alg-art-works",
+		"colour":"#CCCC00"
+    }     
+]
