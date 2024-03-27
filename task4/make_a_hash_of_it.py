@@ -1,13 +1,18 @@
+import requests
 import hashlib
+import json
 
-m = hashlib.sha256()
+#cataloguejson = f'https://raw.githubusercontent.com/rethread-studio/algorithmic-art-course/main/cartels/data.json'
+cataloguejson = f'https://raw.githubusercontent.com/margelle/algorithmic-art-tasks/main/task4/catalogue.json'
 
-m.update(b"Nobody inspects")
-
-m.update(b" the spammish repetition")
-
-m.digest()
-b'\x03\x1e\xdd}Ae\x15\x93\xc5\xfe\\\x00o\xa5u+7\xfd\xdf\xf7\xbcN\x84:\xa6\xaf\x0c\x95\x0fK\x94\x06'
-
-m.hexdigest()
-'031edd7d41651593c5fe5c006fa5752b37fddff7bc4e843aa6af0c950f4b9406'
+response = requests.get(cataloguejson)
+if response.status_code == 200:
+    catalogue = json.loads(response.text)
+    for piece in catalogue:
+        if piece['code'] !='None':
+            code = requests.get(piece['code'])
+            print(code)            
+            h = hashlib.shake_256(code.content)
+            print(piece['artist'], piece['colour'], h.hexdigest(1800))
+else:
+    print("File retrieval failed. Status code:", response.status_code)
