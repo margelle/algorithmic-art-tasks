@@ -4,14 +4,14 @@ let artworks;
 let currentArtwork;
 let iframeElement, imgElement, pElement;
 
-const N_FRAMES = 3600;
+const N_FRAMES = 2500;
 
 function preload() {
     artworks = loadStrings("slideshow.txt");
 }
 
 function setup() {
-    frameCount = N_FRAMES-1;
+    frameCount = N_FRAMES - 1;
     iframeElement = document.getElementsByTagName("iframe")[0];
     imgElement = document.getElementsByTagName("img")[0];
     pElement = document.getElementsByTagName("p")[0];
@@ -54,5 +54,5 @@ function draw() {
 }
 
 function mouseClicked() {
-    frameCount = N_FRAMES-1;
+    frameCount = N_FRAMES - 1;
 }
