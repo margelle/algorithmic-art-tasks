@@ -5,7 +5,6 @@ import csv
 import re
 import itertools
 
-#cataloguejson = f'https://raw.githubusercontent.com/rethread-studio/algorithmic-art-course/main/cartels/data.json'
 cataloguejson = f'https://raw.githubusercontent.com/margelle/algorithmic-art-tasks/main/task4/catalogue.json'
 
 response = requests.get(cataloguejson)
@@ -37,5 +36,3 @@ with open('filename3.txt', 'w') as myfile:
     wr = csv.writer(myfile)
     wr.writerow(introcolours)
     wr.writerow(outlist)        
-    #for i in range(len(artistlist)):       
-    #    wr.writerow(artistlist[i])        
