@@ -7,7 +7,7 @@
     },
     {
         "title": "Meta cartel",
-        "artist": "IFT625",
+        "artist": "IFT6251",
         "repo": "https://github.com/rethread-studio/algorithmic-art-course/cartels/",
         "code": "https://raw.githubusercontent.com/rethread-studio/algorithmic-art-course/main/cartels/sketch.js",
         "colour": "#80FFD0"
@@ -55,8 +55,8 @@
         "colour": "#2600E6"
     },
     {
-        "title": "HRRD",
-        "artist": "Yvan",
+        "title": "BPMosaic",
+        "artist": "Yvan Brunel",
         "repo": "https://github.com/YBTopaz8/DataDrivenArt/tree/main/HRRD",
         "code": "https://raw.githubusercontent.com/YBTopaz8/DataDrivenArt/main/HRRD/script.js",
         "colour": "#00B31E"
