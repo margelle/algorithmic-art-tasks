@@ -32,7 +32,7 @@ for i in range(len(catalogue)):
 
 outlist = list(itertools.chain(*artistlist))
 
-with open('filename3.txt', 'w') as myfile:
+with open('cafouiller.txt', 'w') as myfile:
     wr = csv.writer(myfile)
     wr.writerow(introcolours)
     wr.writerow(outlist)        
