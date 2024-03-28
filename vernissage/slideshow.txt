@@ -1,2 +1,3 @@
 https://margelle.github.io/algorithmic-art-tasks/task1/index.html,
 https://margelle.github.io/algorithmic-art-tasks/task3/margelletask3.html,
+https://margelle.github.io/algorithmic-art-tasks/task2/index.html
