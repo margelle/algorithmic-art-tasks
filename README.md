@@ -7,6 +7,6 @@ IFT6251 hiver 2024
 - [task 3](https://margelle.github.io/algorithmic-art-tasks/task3/)
 - [task 4](https://github.com/margelle/algorithmic-art-tasks/tree/main/task4)
 
-  ![still](https://github.com/margelle/algorithmic-art-tasks/blob/main/task4/task4.jpg)
-
+![photo of task 4](/algorithmic-art-tasks/assets/task4.png)
+  
 
